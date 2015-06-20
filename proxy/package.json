@@ -1,0 +1,21 @@
+{
+  "name": "proxy",
+  "version": "0.0.0",
+  "description": "proxy based headers",
+  "main": "server.js",
+  "dependencies": {
+    "colors": "~1.0.3",
+    "lodash": "~3.5.0",
+    "http-proxy": "~1.9.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "proxy"
+  ],
+  "author": "Jacob Dalton",
+  "license": "ISC"
+}

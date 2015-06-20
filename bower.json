@@ -1,0 +1,28 @@
+{
+  "name": "cyclehack_leaflet",
+  "version": "0.0.0",
+  "authors": [
+    "Jacob Dalton <jacobrdalton@gmail.com>"
+  ],
+  "description": "fe cycle",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "angular",
+    "bower"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "main": "index.html",
+  "dependencies": {
+    "leaflet": "~0.7.3",
+    "lodash": "~3.9.3"
+  }
+}
