@@ -1,21 +1,20 @@
 var commentMarkers = [];
 
+var map = L.map('map').setView([45.001064, -93.256577], 13);
+
+// title
+L.tileLayer(
+  // 'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', // has bike paths in red, blue
+  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    attribution: '&copy; OpenCycleMap'
+  }
+).addTo(map);
+
 function buildMap(rides,comments) {
 
   pathPoints = rides[0].pathPoints; // since we only have one path at the moment
 
-  var map = L.map('map').setView([45.001064, -93.256577], 13);
-
-  // TILE:
-
-  // open layers
-  // var layer = L.tileLayer( 'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', { attribution: '&copy; OpenCycleMap' }  );
-  var layer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }  );
-  layer.addTo(map);
-
-  // google
-  // var googleLayer = new L.Google('ROADMAP');
-  // map.addLayer(googleLayer);
 
   // PATH(s):
   var startTimeStr = pathPoints[0].time;
@@ -74,9 +73,20 @@ function buildMap(rides,comments) {
     accidentMarker.bindPopup(accident.content + "<br/><sup>~" + accident.username + "</sup>");
 
     accidentMarkers.push(accidentMarker);
-
   });
-  
+
 }
+
+function addActivities(activities) {
+
+  var summaries = _.map(activities, 'route_summary');
+
+  _.each(summaries, function(latlngs) {
+    L.polyline(latlngs, {color: 'blue', opacity: .4 }).addTo(map);
+  });
+
+}
+
+addActivities(activities);
 
 buildMap(rides,comments);
