@@ -32,7 +32,16 @@ function buildMap(rides,comments) {
     commentMarker.bindPopup(comment.content + "<br/><sup>~" + comment.username + "</sup>");
     commentMarkers.push(commentMarker);
   });
-  
 }
 
+function addActivities(activities) {
+  var summaries = _.map(activities, 'route_summary');
+
+  _.each(summaries, function(latlngs) {
+    L.polyline(latlngs, {color: 'red', opacity: .4 }).addTo(map);
+  });
+}
+
+addActivities(activities);
 buildMap(rides,comments);
+
