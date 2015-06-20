@@ -6,7 +6,8 @@ var map = L.map('map').setView([45.001064, -93.256577], 13);
 // title
 L.tileLayer(
   // 'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', // has bike paths in red, blue
-  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  // 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
   {
     attribution: '&copy; OpenCycleMap'
   }
@@ -36,14 +37,23 @@ function buildMap(rides,comments) {
       // shadowSize:   [50, 64], // size of the shadow
       iconAnchor:   [8, 8], // point of the icon which will correspond to marker's location
       // shadowAnchor: [4, 62],  // the same for the shadow
-      popupAnchor:  [8, 0] // point from which the popup should open relative to the iconAnchor
+      popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
     }
   });
   var greenIcon = new BaseIcon({ iconUrl: '/images/dot-green.png' });
-  var redIcon = L.icon({iconUrl: '/images/dot-red.png'});
+  var redIcon = new BaseIcon({iconUrl: '/images/dot-red.png'});
   var grayIcon = new BaseIcon({ iconUrl: '/images/dot-gray.png' });
-  var accidentIcon = new BaseIcon({ iconUrl: '/images/accident.png'});
+  
+  var accidentIcon = L.icon({
+    iconUrl: '/images/accident.png',
+    // shadowUrl: 'leaf-shadow.png',
 
+    iconSize:     [24, 24], // size of the icon
+    // shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [12, 12], // point of the icon which will correspond to marker's location
+    // shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
+  });
 
   // COMMENTS:
   comments.forEach(function(comment, index){
