@@ -7,16 +7,21 @@ function buildMap(rides,comments) {
   var map = L.map('map').setView([45.001064, -93.256577], 13);
 
   // TILE:
-  var layer = L.tileLayer( 'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', { attribution: '&copy; OpenCycleMap' }  );
-  var layer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }  );
 
+  // open layers
+  // var layer = L.tileLayer( 'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', { attribution: '&copy; OpenCycleMap' }  );
+  var layer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }  );
   layer.addTo(map);
+
+  // google
+  // var googleLayer = new L.Google('ROADMAP');
+  // map.addLayer(googleLayer);
 
   // PATH(s):
   var startTimeStr = pathPoints[0].time;
   var startMilli = Date.parse(startTimeStr);
   _.each(pathPoints, function(point) {
-    var circlePoint = L.circle([point.lat, point.lon], 2, {fillColor: '#000', fillOpacity: .7, stroke: false})
+    var circlePoint = L.circle([point.lat, point.lon], 4, {fillColor: '#000', fillOpacity: .7, stroke: false})
     var elapsed = Date.parse(point.time) - startMilli;
     circlePoint.bindPopup("Seconds: " + elapsed/1000);
     circlePoint.addTo(map);
@@ -37,6 +42,7 @@ function buildMap(rides,comments) {
   var greenIcon = new BaseIcon({ iconUrl: '/images/dot-green.png' });
   var redIcon = L.icon({iconUrl: '/images/dot-red.png'});
   var grayIcon = new BaseIcon({ iconUrl: '/images/dot-gray.png' });
+  var accidentIcon = new BaseIcon({ iconUrl: '/images/accident.png'});
 
 
   // COMMENTS:
@@ -53,14 +59,23 @@ function buildMap(rides,comments) {
     }
 
     var commentMarker = L.marker( [comment.lat, comment.lon], {icon: icon }  ).addTo(map);
-
     commentMarker.bindPopup(comment.content + "<br/><sup>~" + comment.username + "</sup>");
+
     commentMarkers.push(commentMarker);
 
   });
   
 
+  // ACCIDENTS:
+  accidents.forEach( function(accident, index){
 
+    var accidentMarker = L.marker( [accident.lat, accident.lng], {icon: accidentIcon }  ).addTo(map);
+
+    accidentMarker.bindPopup(accident.content + "<br/><sup>~" + accident.username + "</sup>");
+
+    accidentMarkers.push(accidentMarker);
+
+  });
   
 }
 

@@ -1,4 +1,4 @@
-var comments = [{
+var accidents = [{
     'id': '2312312',
     'username': 'experimatt',
     'happiness': +1,
