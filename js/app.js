@@ -15,4 +15,4 @@ function buildMap(mapPoints) {
   });
 }
 
-buildMap(map);
+buildMap(mapPoints);
