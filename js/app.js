@@ -6,13 +6,13 @@ function buildMap(rides,comments) {
 
   var map = L.map('map').setView([45.001064, -93.256577], 13);
 
-  // tile
+  // TILE:
   var layer = L.tileLayer( 'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', { attribution: '&copy; OpenCycleMap' }  );
   var layer = L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap' }  );
 
   layer.addTo(map);
 
-  // path(s)
+  // PATH(s):
   var startTimeStr = pathPoints[0].time;
   var startMilli = Date.parse(startTimeStr);
   _.each(pathPoints, function(point) {
@@ -22,38 +22,24 @@ function buildMap(rides,comments) {
     circlePoint.addTo(map);
   });
 
-
-
-  var greenIcon = L.icon({
-    iconUrl: '/images/dot-green.png',
-    // shadowUrl: 'leaf-shadow.png',
-    iconSize:     [16, 16], // size of the icon
-    // shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [8, 8], // point of the icon which will correspond to marker's location
-    // shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [8, 0] // point from which the popup should open relative to the iconAnchor
+  // ICONS:
+  var BaseIcon = L.Icon.extend({
+    options: {
+      iconUrl: '/images/dot-gray.png',
+      // shadowUrl: 'leaf-shadow.png',
+      iconSize:     [16, 16], // size of the icon
+      // shadowSize:   [50, 64], // size of the shadow
+      iconAnchor:   [8, 8], // point of the icon which will correspond to marker's location
+      // shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor:  [8, 0] // point from which the popup should open relative to the iconAnchor
+    }
   });
-  var redIcon = L.icon({
-    iconUrl: '/images/dot-red.png',
-    // shadowUrl: 'leaf-shadow.png',
-    iconSize:     [16, 16], // size of the icon
-    // shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [8, 8], // point of the icon which will correspond to marker's location
-    // shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [8, 0] // point from which the popup should open relative to the iconAnchor
-  });
-  var grayIcon = L.icon({
-    iconUrl: '/images/dot-gray.png',
-    // shadowUrl: 'leaf-shadow.png',
-    iconSize:     [16, 16], // size of the icon
-    // shadowSize:   [50, 64], // size of the shadow
-    iconAnchor:   [8, 8], // point of the icon which will correspond to marker's location
-    // shadowAnchor: [4, 62],  // the same for the shadow
-    popupAnchor:  [8, 0] // point from which the popup should open relative to the iconAnchor
-  });
+  var greenIcon = new BaseIcon({ iconUrl: '/images/dot-green.png' });
+  var redIcon = L.icon({iconUrl: '/images/dot-red.png'});
+  var grayIcon = new BaseIcon({ iconUrl: '/images/dot-gray.png' });
 
 
-  // comments
+  // COMMENTS:
   comments.forEach(function(comment, index){
 
     var icon;
@@ -70,7 +56,11 @@ function buildMap(rides,comments) {
 
     commentMarker.bindPopup(comment.content + "<br/><sup>~" + comment.username + "</sup>");
     commentMarkers.push(commentMarker);
+
   });
+  
+
+
   
 }
 
