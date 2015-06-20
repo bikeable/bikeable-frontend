@@ -1,5 +1,6 @@
 html, body, #main {
   height: 100%;
+  margin: 0;
   font-family: arial, sans-serif;
   overflow: hidden;
 }
