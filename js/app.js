@@ -1,13 +1,21 @@
-function buildMap(rides) {
+var commentMarkers = [];
+
+function buildMap(rides,comments) {
 
   pathPoints = rides[0].pathPoints; // since we only have one path at the moment
 
   var map = L.map('map').setView([45.001064, -93.256577], 13);
 
-  L.tileLayer('http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', { // has bike paths in red, blue
-    attribution: '&copy; OpenCycleMap'
-  }).addTo(map);
+  // title
+  L.tileLayer(
+    // 'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', // has bike paths in red, blue
+    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    { 
+      attribution: '&copy; OpenCycleMap'
+    }
+  ).addTo(map);
 
+  // path(s)
   var startTimeStr = pathPoints[0].time;
   var startMilli = Date.parse(startTimeStr);
   _.each(pathPoints, function(point) {
@@ -16,6 +24,14 @@ function buildMap(rides) {
     circlePoint.bindPopup("Seconds: " + elapsed/1000);
     circlePoint.addTo(map);
   });
+
+  // comments
+  comments.forEach(function(comment, index){
+    var commentMarker = L.marker([comment.lat, comment.lon]).addTo(map);
+    commentMarker.bindPopup(comment.content + "<br/><sup>~" + comment.username + "</sup>");
+    commentMarkers.push(commentMarker);
+  });
+  
 }
 
-buildMap(rides);
+buildMap(rides,comments);
