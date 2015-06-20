@@ -1,7 +1,7 @@
 function buildMap(mapPoints) {
   var map = L.map('map').setView([45.001064, -93.256577], 13);
 
-  L.tileLayer('http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', {
+  L.tileLayer('http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', { // has bike paths in red, blue
     attribution: '&copy; OpenCycleMap'
   }).addTo(map);
 
@@ -15,4 +15,4 @@ function buildMap(mapPoints) {
   });
 }
 
-buildMap(mapPoints);
+buildMap(rides[0].pathPoints);
