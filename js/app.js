@@ -1,4 +1,5 @@
 var commentMarkers = [];
+var accidentMarkers = [];
 
 var map = L.map('map').setView([45.001064, -93.256577], 13);
 
@@ -68,9 +69,9 @@ function buildMap(rides,comments) {
   // ACCIDENTS:
   accidents.forEach( function(accident, index){
 
-    var accidentMarker = L.marker( [accident.lat, accident.lng], {icon: accidentIcon }  ).addTo(map);
+    var accidentMarker = L.marker( [accident.lat, accident.lon], {icon: accidentIcon }  ).addTo(map);
 
-    accidentMarker.bindPopup(accident.content + "<br/><sup>~" + accident.username + "</sup>");
+    accidentMarker.bindPopup(accident.accidentsPerYear + "<br/><sup>accidents per year</sup>");
 
     accidentMarkers.push(accidentMarker);
   });
