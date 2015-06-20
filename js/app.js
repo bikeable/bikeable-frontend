@@ -1,8 +1,8 @@
 var commentMarkers = [];
 var accidentMarkers = [];
 
-var map = L.map('map').setView([45.001064, -93.256577], 13);
-
+var map = L.map('map').setView([44.955576, -93.226135], 13);
+ 
 // title
 L.tileLayer(
   // 'http://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', // has bike paths in red, blue
@@ -19,14 +19,14 @@ function buildMap(rides,comments) {
 
 
   // PATH(s):
-  var startTimeStr = pathPoints[0].time;
-  var startMilli = Date.parse(startTimeStr);
-  _.each(pathPoints, function(point) {
-    var circlePoint = L.circle([point.lat, point.lon], 4, {fillColor: '#000', fillOpacity: .7, stroke: false})
-    var elapsed = Date.parse(point.time) - startMilli;
-    circlePoint.bindPopup("Seconds: " + elapsed/1000);
-    circlePoint.addTo(map);
-  });
+  // var startTimeStr = pathPoints[0].time;
+  // var startMilli = Date.parse(startTimeStr);
+  // _.each(pathPoints, function(point) {
+  //   var circlePoint = L.circle([point.lat, point.lon], 4, {fillColor: '#000', fillOpacity: .7, stroke: false})
+  //   var elapsed = Date.parse(point.time) - startMilli;
+  //   circlePoint.bindPopup("Seconds: " + elapsed/1000);
+  //   circlePoint.addTo(map);
+  // });
 
   // ICONS:
   var BaseIcon = L.Icon.extend({
@@ -93,7 +93,7 @@ function addActivities(activities) {
   var summaries = _.map(activities, 'route_summary');
 
   _.each(summaries, function(latlngs) {
-    L.polyline(latlngs, {color: 'blue', opacity: .4 }).addTo(map);
+    L.polyline(latlngs, {color: 'blue', opacity: .25 }).addTo(map);
   });
 
 }
