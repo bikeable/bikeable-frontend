@@ -1,7 +1,12 @@
 var commentMarkers = [];
 var accidentMarkers = [];
 
-var map = L.map('map').setView([44.955576, -93.226135], 13);
+var start;
+    
+    start = [44.955576, -93.226135]; // Hack Factory
+    start = [44.965810, -93.269480]; // center of the jun20 awesome
+
+var map = L.map('map').setView(start, 13);
  
 // title
 L.tileLayer(
