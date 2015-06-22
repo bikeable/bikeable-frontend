@@ -36,7 +36,7 @@ function buildMap(rides,comments) {
   // ICONS:
   var BaseIcon = L.Icon.extend({
     options: {
-      iconUrl: '/images/dot-gray.png',
+      iconUrl: '/images/symbols/comment-neutral.png',
       // shadowUrl: 'leaf-shadow.png',
       iconSize:     [16, 16], // size of the icon
       // shadowSize:   [50, 64], // size of the shadow
@@ -45,14 +45,14 @@ function buildMap(rides,comments) {
       popupAnchor:  [0, 0] // point from which the popup should open relative to the iconAnchor
     }
   });
-  var greenIcon = new BaseIcon({ iconUrl: '/images/dot-green.png' });
-  var redIcon = new BaseIcon({iconUrl: '/images/dot-red.png'});
-  var grayIcon = new BaseIcon({ iconUrl: '/images/dot-gray.png' });
+
+  var commentPositiveIcon = new BaseIcon({ iconUrl: '/images/symbols/comment-positive.png' });
+  var commentNeutralIcon  = new BaseIcon({ iconUrl: '/images/symbols/comment-neutral.png'  });
+  var commentNegativeIcon = new BaseIcon({ iconUrl: '/images/symbols/comment-negative.png' });
   
   var accidentIcon = L.icon({
-    iconUrl: '/images/accident.png',
+    iconUrl: '/images/symbols/accident.png',
     // shadowUrl: 'leaf-shadow.png',
-
     iconSize:     [24, 24], // size of the icon
     // shadowSize:   [50, 64], // size of the shadow
     iconAnchor:   [12, 12], // point of the icon which will correspond to marker's location
@@ -66,11 +66,11 @@ function buildMap(rides,comments) {
     var icon;
     switch(comment.happiness){
       case 1:
-        icon = greenIcon; break;
+        icon = commentPositiveIcon; break;
       case -1:
-        icon = redIcon; break;
+        icon = commentNegativeIcon; break;
       default:
-        icon = grayIcon; break;
+        icon = commentNeutralIcon; break;
     }
 
     var commentMarker = L.marker( [comment.lat, comment.lon], {icon: icon }  ).addTo(map);
@@ -98,7 +98,7 @@ function addActivities(activities) {
   var summaries = _.map(activities, 'route_summary');
 
   _.each(summaries, function(latlngs) {
-    L.polyline(latlngs, {color: 'blue', opacity: .25 }).addTo(map);
+    L.polyline(latlngs, {color: 'blue', opacity: .15 }).addTo(map);
   });
 
 }
