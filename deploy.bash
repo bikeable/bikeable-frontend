@@ -1,2 +1,2 @@
 #!/bin/bash
-rsync -r . wordwide@wordwideweb.co:bikeable.io/html/
+rsync -rv . wordwide@wordwideweb.co:bikeable.io/html/
