@@ -55,6 +55,19 @@ i.icon-button {
 	display: block;
 	width: 25%;
 	float: left;
+	/*height: 50px;*/
+	/*border coming soon*/
+}
+.legend symbol meaning {
+	display: inline-block;
+}
+.legend img.screenshot {
+	width: 50px; height: 25px;
+	vertical-align: middle;
+}
+.legend img.symbol {
+	width: 16px; height: 16px; padding: 4.5px 0;
+	vertical-align: middle;
 }
 /*.legend:after {
 	clear:both; FAIL!!
